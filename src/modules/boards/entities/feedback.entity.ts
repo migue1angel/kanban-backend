@@ -1,14 +1,14 @@
 import {
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  UpdateDateColumn,
   DeleteDateColumn,
   Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('boards', { schema: 'boards' })
-export class BoardEntity {
+@Entity('feedbacks', { schema: 'boards' })
+export class FeedbackEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -27,14 +27,10 @@ export class BoardEntity {
   })
   deletedAt: Date;
 
-  @Column()
-  name: string;
-
-  @Column()
-  description: string;
-
-  // relationships
-
-//   @Column()
-//   tasks: string[];
+  @Column({
+    type: 'varchar',
+    length: 200,
+  })
+  content: string;
 }
+ 
