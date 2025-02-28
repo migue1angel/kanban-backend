@@ -1,20 +1,26 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('teams', { schema: 'teams' })
-export class Team {
+@Entity('tasks', { schema: 'boards' })
+export class Task {
     // Entity properties
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @CreateDateColumn()
-    created_at: Date;
+    createdAt: Date;
 
     @DeleteDateColumn()
-    deleted_at: Date;
+    deletedAt: Date;
 
     @Column()
-    team_name: string;
+    title: string;
 
     @Column()
     description: string;
+
+    @Column()
+    priority: number;
+
+    @Column()
+    due_date: Date;
 }

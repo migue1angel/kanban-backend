@@ -1,7 +1,8 @@
+import { Delete } from "@nestjs/common";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('teams', { schema: 'teams' })
-export class Team {
+@Entity('attachments', { schema: 'boards' })
+export class Attachment {
     // Entity properties
     @PrimaryGeneratedColumn('uuid')
     id: number;
@@ -13,8 +14,14 @@ export class Team {
     deleted_at: Date;
 
     @Column()
-    team_name: string;
+    file_name: string;
 
     @Column()
-    description: string;
+    file_url: string;
+
+    @Column()
+    file_size: string;
+
+    @Column()
+    content_type: string;
 }

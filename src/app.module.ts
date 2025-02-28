@@ -5,12 +5,11 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BoardsModule } from './modules/boards/boards.module';
 import { CommonModule } from './modules/common/common.module';
 import { TeamsModule } from './modules/teams/teams.module';
-import { UsersModule } from './modules/users/users.module';
 import { DatabaseModule } from './database/database.module';
+
 
 @Module({
   imports: [
-    UsersModule,
     AuthModule,
     BoardsModule,
     TeamsModule,

@@ -1,13 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { AuthService } from './services/auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor() {}
 
-  @Post()
+  /* @Post()
   create(@Body() createAuthDto: CreateAuthDto) {
     return this.authService.create(createAuthDto);
   }
@@ -30,5 +27,5 @@ export class AuthController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.authService.remove(+id);
-  }
+  } */
 }
