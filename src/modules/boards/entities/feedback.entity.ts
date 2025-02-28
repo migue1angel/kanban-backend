@@ -1,8 +1,11 @@
+import { UserEntity } from 'src/modules/auth/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -32,5 +35,8 @@ export class FeedbackEntity {
     length: 200,
   })
   content: string;
+
+  @ManyToOne(() => UserEntity, (user) => user.feedbacks)
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 }
- 

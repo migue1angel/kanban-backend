@@ -5,7 +5,10 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
 } from 'typeorm';
+import { Task } from './task.entity';
+import { Team } from 'src/modules/teams/entities/team.entity';
 
 @Entity('boards', { schema: 'boards' })
 export class BoardEntity {
@@ -35,6 +38,9 @@ export class BoardEntity {
 
   // relationships
 
-//   @Column()
-//   tasks: string[];
+  // @OneToMany(() => Task, (task) => task.board)
+  // tasks: Task[];
+  
+  // @OneToMany(() => Team, (team) => team.board)
+  // teams: Team[];
 }
