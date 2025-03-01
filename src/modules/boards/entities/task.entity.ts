@@ -13,6 +13,7 @@ import {
 import { BoardEntity } from './board.entity';
 import { UserEntity } from 'src/modules/auth/entities/user.entity';
 import { AttachmentEntity } from './attachment.entity';
+import { FeedbackEntity } from './feedback.entity';
 
 @Entity('tasks', { schema: 'boards' })
 export class TaskEntity {
@@ -46,7 +47,7 @@ export class TaskEntity {
 
   // relationships
   @ManyToOne(() => BoardEntity, (board) => board.tasks)
-  @JoinColumn({name: 'board_id'})
+  @JoinColumn({ name: 'board_id' })
   board: BoardEntity;
 
   @OneToMany(() => AttachmentEntity, (attachment) => attachment.task)
@@ -57,4 +58,7 @@ export class TaskEntity {
     name: 'tasks_assignments',
   })
   users: UserEntity[];
+
+  @OneToMany(() => FeedbackEntity, (feedback) => feedback.task)
+  feedbacks: FeedbackEntity[];
 }

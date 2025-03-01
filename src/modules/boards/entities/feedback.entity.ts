@@ -9,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { TaskEntity } from './task.entity';
 
 @Entity('feedbacks', { schema: 'boards' })
 export class FeedbackEntity {
@@ -39,4 +40,8 @@ export class FeedbackEntity {
   @ManyToOne(() => UserEntity, (user) => user.feedbacks)
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
+
+  @ManyToOne(() => TaskEntity, (task) => task.feedbacks)
+  @JoinColumn({ name: 'task_id' })
+  task: TaskEntity;
 }
