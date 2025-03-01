@@ -6,9 +6,12 @@ import {
   DeleteDateColumn,
   Entity,
   OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
-import { Task } from './task.entity';
-import { Team } from 'src/modules/teams/entities/team.entity';
+import { TaskEntity } from './task.entity';
+import { UserEntity } from 'src/modules/auth/entities/user.entity';
+import { TeamMemberEntity } from 'src/modules/teams/entities/team-members.entity';
 
 @Entity('boards', { schema: 'boards' })
 export class BoardEntity {
@@ -38,9 +41,15 @@ export class BoardEntity {
 
   // relationships
 
-  // @OneToMany(() => Task, (task) => task.board)
-  // tasks: Task[];
-  
-  // @OneToMany(() => Team, (team) => team.board)
-  // teams: Team[];
+  @OneToMany(() => TaskEntity, (task) => task.board)
+  tasks: TaskEntity[];
+
+  @OneToMany(() => TeamMemberEntity, (team) => team.board)
+  teamMembers: TeamMemberEntity[];
+
+  @ManyToOne(() => UserEntity, (user) => user.boards)
+  @JoinColumn({ 
+    name: 'owner_id',
+  })
+  user: UserEntity;
 }

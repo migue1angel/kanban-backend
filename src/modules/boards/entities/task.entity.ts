@@ -1,26 +1,60 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { BoardEntity } from './board.entity';
+import { UserEntity } from 'src/modules/auth/entities/user.entity';
+import { AttachmentEntity } from './attachment.entity';
 
 @Entity('tasks', { schema: 'boards' })
-export class Task {
-    // Entity properties
-    @PrimaryGeneratedColumn()
-    id: number;
+export class TaskEntity {
+  // Entity properties
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn({
+    name: 'created_at',
+  })
+  createdAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @DeleteDateColumn({
+    name: 'deleted_at',
+  })
+  deletedAt: Date;
 
-    @Column()
-    title: string;
+  @Column()
+  title: string;
 
-    @Column()
-    description: string;
+  @Column()
+  description: string;
 
-    @Column()
-    priority: number;
+  @Column()
+  priority: number;
 
-    @Column()
-    due_date: Date;
+  @Column({
+    name: 'due_date',
+  })
+  dueDate: Date;
+
+  // relationships
+  @ManyToOne(() => BoardEntity, (board) => board.tasks)
+  @JoinColumn({name: 'board_id'})
+  board: BoardEntity;
+
+  @OneToMany(() => AttachmentEntity, (attachment) => attachment.task)
+  attachments: AttachmentEntity[];
+
+  @ManyToMany(() => UserEntity, (user) => user.teamMembers)
+  @JoinTable({
+    name: 'tasks_assignments',
+  })
+  users: UserEntity[];
 }

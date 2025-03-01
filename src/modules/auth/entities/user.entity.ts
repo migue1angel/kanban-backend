@@ -1,10 +1,12 @@
+import { BoardEntity } from 'src/modules/boards/entities/board.entity';
 import { FeedbackEntity } from 'src/modules/boards/entities/feedback.entity';
-import { Task } from 'src/modules/boards/entities/task.entity';
-import { Team } from 'src/modules/teams/entities/team.entity';
+import { TaskEntity } from 'src/modules/boards/entities/task.entity';
+import { TeamMemberEntity } from 'src/modules/teams/entities/team-members.entity';
 import {
   Column,
   Entity,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -25,12 +27,13 @@ export class UserEntity {
   @Column()
   password: string;
 
-  // @ManyToMany(()=> Team, team => team.users)
-  // teams: Team[];
-
-  // @ManyToMany(() => Task, (task) => task.users)
-  // tasks: Task[];
+  // relationships
+  @OneToMany(() => TeamMemberEntity, (teamMember) => teamMember.user)
+  teamMembers: TeamMemberEntity[];
 
   @OneToMany(() => FeedbackEntity, (feedback) => feedback.user)
   feedbacks: FeedbackEntity[];
+
+  @OneToMany(() => BoardEntity, (board) => board.user)
+  boards: BoardEntity[];
 }

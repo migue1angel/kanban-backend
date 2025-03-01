@@ -16,7 +16,7 @@ import { pgDataSource } from 'src/shared/consts/datasource';
       database: envs.DB_DATABASE,
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       synchronize: true,
-      // dropSchema:true
+      dropSchema:true
     }),
   ],
   providers: [],
