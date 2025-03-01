@@ -35,7 +35,7 @@ export class BoardEntity {
 
   @Column()
   name: string;
-
+  
   @Column()
   description: string;
 
@@ -51,5 +51,5 @@ export class BoardEntity {
   @JoinColumn({ 
     name: 'owner_id',
   })
-  user: UserEntity;
+  userId: UserEntity;
 }

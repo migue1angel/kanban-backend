@@ -3,14 +3,14 @@ import { AuthController } from './controllers/auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseModule } from 'src/database/database.module';
 import { UserEntity } from './entities/user.entity';
-import { pgDataSource } from 'src/shared/consts/datasource';
+import { UsersController } from './controllers/users.controller';
+import { UsersService } from './services/users.service';
 
 @Module({
   imports: [
-    DatabaseModule,
-    TypeOrmModule.forFeature([UserEntity], pgDataSource),
+    TypeOrmModule.forFeature([UserEntity]),
   ],
-  controllers: [AuthController],
-  providers: [],
+  controllers: [AuthController, UsersController],
+  providers: [UsersService],
 })
 export class AuthModule {}

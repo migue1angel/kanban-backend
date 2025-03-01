@@ -3,6 +3,7 @@ import { UpdateUserDto } from '../dtos/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { Repository } from 'typeorm';
+import { pgDataSource } from 'src/shared/consts/datasource';
 
 @Injectable()
 export class UsersService {

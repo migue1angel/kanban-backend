@@ -7,7 +7,6 @@ import { pgDataSource } from 'src/shared/consts/datasource';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      name: pgDataSource,
       type: 'postgres',
       host: envs.DB_HOST,
       port: envs.DB_PORT,

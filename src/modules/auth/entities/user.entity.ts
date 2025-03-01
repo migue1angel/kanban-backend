@@ -1,12 +1,9 @@
 import { BoardEntity } from 'src/modules/boards/entities/board.entity';
 import { FeedbackEntity } from 'src/modules/boards/entities/feedback.entity';
-import { TaskEntity } from 'src/modules/boards/entities/task.entity';
 import { TeamMemberEntity } from 'src/modules/teams/entities/team-members.entity';
 import {
   Column,
   Entity,
-  ManyToMany,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -34,6 +31,6 @@ export class UserEntity {
   @OneToMany(() => FeedbackEntity, (feedback) => feedback.user)
   feedbacks: FeedbackEntity[];
 
-  @OneToMany(() => BoardEntity, (board) => board.user)
+  @OneToMany(() => BoardEntity, (board) => board.userId)
   boards: BoardEntity[];
 }
