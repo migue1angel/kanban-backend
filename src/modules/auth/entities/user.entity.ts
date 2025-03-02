@@ -31,6 +31,6 @@ export class UserEntity {
   @OneToMany(() => FeedbackEntity, (feedback) => feedback.user)
   feedbacks: FeedbackEntity[];
 
-  @OneToMany(() => BoardEntity, (board) => board.userId)
+  @OneToMany(() => BoardEntity, (board) => board.owner)
   boards: BoardEntity[];
 }

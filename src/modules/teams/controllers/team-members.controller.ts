@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Delete, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { TeamMembersService } from '../services/team-members.service';
 import { CreateTeamMemberDto } from '../dto/create-team-member.dto';
 
@@ -7,8 +15,8 @@ export class TeamMembersController {
   constructor(private readonly teamMembersService: TeamMembersService) {}
 
   @Post()
-  create(@Body() createTeamDto: CreateTeamMemberDto) {
-    return this.teamMembersService.create(createTeamDto);
+  async create(@Body() createTeamDto: CreateTeamMemberDto) {
+    return await this.teamMembersService.create(createTeamDto);
   }
 
   @Get()

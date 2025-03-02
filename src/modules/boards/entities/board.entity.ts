@@ -35,7 +35,7 @@ export class BoardEntity {
 
   @Column()
   name: string;
-  
+
   @Column()
   description: string;
 
@@ -47,9 +47,9 @@ export class BoardEntity {
   @OneToMany(() => TeamMemberEntity, (team) => team.board)
   teamMembers: TeamMemberEntity[];
 
-  @ManyToOne(() => UserEntity, (user) => user.boards)
-  @JoinColumn({ 
+  @ManyToOne(() => UserEntity, (user) => user.boards, { nullable: false})
+  @JoinColumn({
     name: 'owner_id',
   })
-  userId: UserEntity;
+  owner: UserEntity;
 }

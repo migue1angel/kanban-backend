@@ -8,22 +8,23 @@ import { TeamMemberEntity } from '../entities/team-members.entity';
 export class TeamMembersService {
   constructor(
     @InjectRepository(TeamMemberEntity)
-    private teamMembersRepository: Repository<TeamMemberEntity>,
+    private readonly repository: Repository<TeamMemberEntity>,
   ) {}
 
-  create(createTeamDto: CreateTeamMemberDto) {
-    return 'This action adds a new team';
+  async create(createTeamMemberDto: CreateTeamMemberDto) {
+    const teamMember = this.repository.create(createTeamMemberDto);
+    return await this.repository.save(teamMember);
   }
 
-  findAll() {
+  async findAll() {
     return `This action returns all teams`;
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return `This action returns a #${id} team`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} team`;
   }
 }

@@ -21,10 +21,14 @@ export class RoleEntity {
   @Column()
   name: string;
 
-  @Column()
-  code: string;
+  @Column({
+    type:'int'
+  })
+  code: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   description: string;
 
   // relationships

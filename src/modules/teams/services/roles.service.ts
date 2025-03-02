@@ -8,11 +8,18 @@ import { CreateRoleDto } from '../dto/create-role.dto';
 export class RolesService {
   constructor(
     @InjectRepository(RoleEntity)
-    private readonly roleRepository: Repository<RoleEntity>,
+    private readonly repository: Repository<RoleEntity>,
   ) {}
 
   async create(createRoleDto: CreateRoleDto): Promise<RoleEntity> {
-    const role = this.roleRepository.create(createRoleDto);
-    return await this.roleRepository.save(role);
+    const role = this.repository.create(createRoleDto);
+    return await this.repository.save(role);
+  }
+
+  async insertMany(createRolesDto: CreateRoleDto[]) {
+    const roles = createRolesDto.map((role) => {
+      return this.repository.create(role);
+    });
+    return await this.repository.save(roles);
   }
 }

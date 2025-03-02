@@ -8,9 +8,5 @@ export class CreateBoardDto {
     @IsNotEmpty()
     @IsString()
     description: string;
-
-    @IsNotEmpty()
-    @IsUUID()
-    userId: string;
 }
 

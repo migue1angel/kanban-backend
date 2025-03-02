@@ -1,11 +1,13 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { envs } from 'src/config/envs';
-import { pgDataSource } from 'src/shared/consts/datasource';
+import { DatabaseSeeder } from './seeders/database.seeder';
+import { TeamsModule } from 'src/modules/teams/teams.module';
 
 @Global()
 @Module({
   imports: [
+    TeamsModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: envs.DB_HOST,
@@ -18,7 +20,7 @@ import { pgDataSource } from 'src/shared/consts/datasource';
       // dropSchema:true
     }),
   ],
-  providers: [],
-  exports: [],
+  providers: [DatabaseSeeder],
+  exports: [DatabaseSeeder],
 })
 export class DatabaseModule {}
