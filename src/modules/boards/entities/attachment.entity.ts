@@ -1,12 +1,12 @@
 import { Delete } from "@nestjs/common";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TaskEntity } from "./task.entity";
 
 @Entity('attachments', { schema: 'boards' })
 export class AttachmentEntity {
     // Entity properties
     @PrimaryGeneratedColumn('uuid')
-    id: number;
+    id: string;
 
     @CreateDateColumn()
     created_at: Date;
@@ -37,5 +37,6 @@ export class AttachmentEntity {
 
     // relationships
     @ManyToOne(() => TaskEntity, (task) => task.attachments)
+    @JoinColumn({ name: 'task_id' })
     task: TaskEntity;
 }

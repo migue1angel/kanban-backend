@@ -1,2 +1,2 @@
-export * from './create-board.dto';
-export * from './update-board.dto';
+export * from './board/create-board.dto';
+export * from './board/update-board.dto';

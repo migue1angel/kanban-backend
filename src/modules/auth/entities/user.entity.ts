@@ -1,5 +1,6 @@
 import { BoardEntity } from 'src/modules/boards/entities/board.entity';
 import { FeedbackEntity } from 'src/modules/boards/entities/feedback.entity';
+import { TaskAssigmentEntity } from 'src/modules/boards/entities/task-assigment.entity';
 import { TeamMemberEntity } from 'src/modules/teams/entities/team-members.entity';
 import {
   Column,
@@ -33,4 +34,8 @@ export class UserEntity {
 
   @OneToMany(() => BoardEntity, (board) => board.owner)
   boards: BoardEntity[];
+
+  @OneToMany(() => TaskAssigmentEntity, (taskAssigment) => taskAssigment.user)
+  taskAssigments: TaskAssigmentEntity[];
+
 }

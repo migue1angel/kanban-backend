@@ -14,6 +14,7 @@ import { BoardEntity } from './board.entity';
 import { UserEntity } from 'src/modules/auth/entities/user.entity';
 import { AttachmentEntity } from './attachment.entity';
 import { FeedbackEntity } from './feedback.entity';
+import { TaskAssigmentEntity } from './task-assigment.entity';
 
 @Entity('tasks', { schema: 'boards' })
 export class TaskEntity {
@@ -38,7 +39,7 @@ export class TaskEntity {
   description: string;
 
   @Column()
-  priority: number;
+  priority: boolean;
 
   @Column({
     name: 'due_date',
@@ -61,4 +62,7 @@ export class TaskEntity {
 
   @OneToMany(() => FeedbackEntity, (feedback) => feedback.task)
   feedbacks: FeedbackEntity[];
+
+  @OneToMany(() => TaskAssigmentEntity, (taskAssigments) => taskAssigments.task)
+  taskAssigments: TaskEntity[];
 }

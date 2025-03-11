@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { CreateBoardDto } from '../dto/create-board.dto';
-import { UpdateBoardDto } from '../dto/update-board.dto';
+import { CreateBoardDto } from '../dto/board/create-board.dto';
+import { UpdateBoardDto } from '../dto/board/update-board.dto';
 import { BoardsService } from '../services/boards.service';
 
 @Controller('boards')
