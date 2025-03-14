@@ -14,11 +14,9 @@ import { BoardEntity } from './board.entity';
 import { UserEntity } from 'src/modules/auth/entities/user.entity';
 import { AttachmentEntity } from './attachment.entity';
 import { FeedbackEntity } from './feedback.entity';
-import { TaskAssigmentEntity } from './task-assigment.entity';
 
 @Entity('tasks', { schema: 'boards' })
 export class TaskEntity {
-  // Entity properties
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -37,6 +35,9 @@ export class TaskEntity {
 
   @Column()
   description: string;
+
+  @Column({ enum: ['todo', 'in_progress', 'to_review', 'done'] })
+  status: string;
 
   @Column()
   priority: boolean;
@@ -62,7 +63,4 @@ export class TaskEntity {
 
   @OneToMany(() => FeedbackEntity, (feedback) => feedback.task)
   feedbacks: FeedbackEntity[];
-
-  @OneToMany(() => TaskAssigmentEntity, (taskAssigments) => taskAssigments.task)
-  taskAssigments: TaskEntity[];
 }

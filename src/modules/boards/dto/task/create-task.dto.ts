@@ -1,24 +1,25 @@
-import { IsBoolean, IsDate, IsInt, IsString, IsUUID } from "class-validator";
+import { IsBoolean, IsDate, IsEnum, IsString, IsUUID } from 'class-validator';
 
 export class CreateTaskDto {
+  @IsString()
+  title: string;
 
-    @IsString()
-    title: string;
+  @IsString()
+  description: string;
 
-    @IsString()
-    description: string;
+  @IsBoolean()
+  priority: boolean;
 
-    @IsBoolean()
-    priority: boolean;
+  @IsDate()
+  dueDate: Date;
 
-    @IsDate()
-    dueDate: Date;
+  @IsUUID()
+  @IsEnum(['todo', 'in_progress', 'to_review', 'done'])
+  boardId: string;
 
-    @IsInt()
-    @IsUUID()
-    boardId: string;
+  @IsString()
+  state: string;
 
-    @IsInt()
-    @IsUUID()
-    userId: string;
+  @IsUUID()
+  userId: string;
 }
