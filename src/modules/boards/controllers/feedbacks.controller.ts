@@ -1,8 +1,8 @@
-import { Body, Post } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 import { FeedbacksService } from "../services/feedbacks.service";
-import { create } from "domain";
 import { CreateFeedbackDto } from "../dto/feedback/create-feedback.dto";
 
+@Controller('feedbacks')
 export class FeedbacksController {
     constructor(
         private readonly feedbacksService: FeedbacksService
@@ -10,7 +10,7 @@ export class FeedbacksController {
 
     @Post()
     async create(@Body() createFeedbackDto: CreateFeedbackDto) {
-        return this.feedbacksService.create(createFeedbackDto);
+        return "Create feedback";
 
     }
 }

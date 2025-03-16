@@ -11,6 +11,7 @@ export class BoardsService {
     @InjectRepository(BoardEntity)
     private readonly boardsRepository: Repository<BoardEntity>,
   ) {}
+  
   async create(createBoardDto: CreateBoardDto, owner: UserEntity) {
     const board = this.boardsRepository.create({ ...createBoardDto, owner });
     return await this.boardsRepository.save(board);

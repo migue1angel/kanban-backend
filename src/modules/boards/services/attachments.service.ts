@@ -13,6 +13,7 @@ export class AttachmentsService {
 
     async create(createAttachmentDto: CreateAttachmentDto) {
         const attachment = await this.attachmentRepository.create(createAttachmentDto);
+        console.log("Create attachment");
         return this.attachmentRepository.save(attachment);
     }
 }

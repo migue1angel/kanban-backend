@@ -7,12 +7,12 @@ import { BoardsService } from '../services/boards.service';
 export class BoardsController {
   constructor(private readonly boardsService: BoardsService) {}
 
-  /* @Post()
+  @Post()
   create(@Body() createBoardDto: CreateBoardDto) {
-    return this.boardsService.create(createBoardDto);
+    return "Create board";
   }
 
-  @Get()
+  /* @Get()
   findAll() {
     return this.boardsService.findAll();
   }

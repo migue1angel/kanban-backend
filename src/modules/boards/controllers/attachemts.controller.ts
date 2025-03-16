@@ -1,7 +1,8 @@
-import { Body, Post } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 import { AttachmentsService } from "../services/attachments.service";
 import { CreateAttachmentDto } from "../dto/attachment/create.attachments.dto";
 
+@Controller('attachments')
 export class AttachmentsController {
   constructor(
     private readonly attachmentsService: AttachmentsService) {}
