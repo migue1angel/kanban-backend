@@ -1,4 +1,6 @@
-import { IsBoolean, IsDate, IsEnum, IsString, IsUUID } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsBoolean, IsDate, IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { BoardEntity } from '../../entities/board.entity';
 
 export class CreateTaskDto {
   @IsString()
@@ -7,18 +9,21 @@ export class CreateTaskDto {
   @IsString()
   description: string;
 
-  @IsBoolean()
-  priority: boolean;
+  @IsString()
+  @IsEnum(['urgent', 'regular', 'important'])
+  priority: string;
 
+  @Type(() => Date)
+  @IsNotEmpty()
   @IsDate()
   dueDate: Date;
 
   @IsUUID()
-  @IsEnum(['todo', 'in_progress', 'to_review', 'done'])
-  boardId: string;
-
-  @IsString()
-  state: string;
+  board: BoardEntity;
+  
+  // @IsString()
+  // @IsEnum(['todo', 'in_progress', 'to_review', 'done'])
+  // status: string;
 
   @IsUUID()
   userId: string;

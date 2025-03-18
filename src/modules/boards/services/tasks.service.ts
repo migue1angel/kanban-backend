@@ -6,15 +6,20 @@ import { CreateTaskDto } from '../dto/task/create-task.dto';
 
 @Injectable()
 export class TasksService {
+  constructor(
+    @InjectRepository(TaskEntity)
+    private readonly taskRepository: Repository<TaskEntity>,
+  ) {}
 
-    constructor(
-        @InjectRepository(TaskEntity)
-        private readonly taskRepository: Repository<TaskEntity>,
-    ) {}
+  async create(createTaskDto: CreateTaskDto) {
+    const task = this.taskRepository.create(createTaskDto);
+    return this.taskRepository.save(task);
+  }
 
-    async create(createTaskDto: CreateTaskDto){
-        const task = this.taskRepository.create(createTaskDto);
-        return this.taskRepository.save(task);
-    }
-
+  async findAll() {
+    return await this.taskRepository.find();
+  }
+  async findByBoard(boardId: string) {
+    return await this.taskRepository.findBy({ board: { id: boardId } });
+  }
 }

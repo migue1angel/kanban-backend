@@ -17,7 +17,7 @@ import { FeedbackEntity } from './feedback.entity';
 
 @Entity('tasks', { schema: 'boards' })
 export class TaskEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @CreateDateColumn({
@@ -36,11 +36,14 @@ export class TaskEntity {
   @Column()
   description: string;
 
-  @Column({ enum: ['todo', 'in_progress', 'to_review', 'done'] })
+  @Column({
+    enum: ['todo', 'in_progress', 'to_review', 'done'],
+    default: 'todo',
+  })
   status: string;
 
-  @Column()
-  priority: boolean;
+  @Column({ enum: ['regular', 'important', 'urgent'] })
+  priority: string;
 
   @Column({
     name: 'due_date',
