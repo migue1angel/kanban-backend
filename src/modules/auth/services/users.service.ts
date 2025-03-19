@@ -1,9 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { UpdateUserDto } from '../dtos/update-user.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entities/user.entity';
 import { Repository } from 'typeorm';
-import { pgDataSource } from 'src/shared/constants/datasource';
+import { CreateUserDto } from '../dto/user/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -12,24 +11,21 @@ export class UsersService {
     private readonly repository: Repository<UserEntity>,
   ) {}
 
-  async create(createUserDto: any) {
+  async create(createUserDto: CreateUserDto) {
     const user = this.repository.create(createUserDto);
     return await this.repository.save(user);
   }
 
   async findAll() {
-    return await this.repository.find();
+    const user = this.repository.find({
+      select: ['id', 'email'],
+    });
+    return user;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async findOneByEmail(email: string) {
+    return await this.repository.findOne({
+      where: { email }, 
+    });
   }
 }
