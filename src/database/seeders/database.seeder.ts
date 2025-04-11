@@ -1,15 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { RolesService } from 'src/modules/teams/services/roles.service';
-import { data } from './data';
+import { roles } from './data';
+import { UsersService } from 'src/modules/auth/services/users.service';
+import { users } from './data';
+;
 
 @Injectable()
 export class DatabaseSeeder {
-  constructor(private readonly rolesService: RolesService) {}
+ constructor(private readonly rolesService: RolesService, private readonly usersService:UsersService) {}
 
   async run() {
-    const roles = await this.rolesService.insertMany(data.roles);
+    const newRoles = await this.rolesService.insertMany(roles);
+    const newUsers = await this.usersService.insertMany(users);
     return {
-      roles,
+      newRoles,
+      newUsers,
     };
   }
 }

@@ -20,5 +20,6 @@ import { envs } from 'src/config/envs';
   ],
   controllers: [ AuthController, UsersController],
   providers: [ AuthService, UsersService],
+  exports: [UsersService],
 })
 export class AuthModule {}

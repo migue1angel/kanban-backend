@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsBoolean, IsDate, IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import { IsDate, IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 import { BoardEntity } from '../../entities/board.entity';
 
 export class CreateTaskDto {
@@ -25,6 +25,4 @@ export class CreateTaskDto {
   // @IsEnum(['todo', 'in_progress', 'to_review', 'done'])
   // status: string;
 
-  @IsUUID()
-  userId: string;
 }

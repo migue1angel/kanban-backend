@@ -3,11 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { envs } from 'src/config/envs';
 import { DatabaseSeeder } from './seeders/database.seeder';
 import { TeamsModule } from 'src/modules/teams/teams.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
 
 @Global()
 @Module({
   imports: [
     TeamsModule,
+    AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: envs.DB_HOST,

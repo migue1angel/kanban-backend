@@ -25,7 +25,14 @@ export class UsersService {
 
   async findOneByEmail(email: string) {
     return await this.repository.findOne({
-      where: { email }, 
+      where: { email },
     });
+  }
+  
+  async insertMany(createUserDto: CreateUserDto[]) {
+    const users = createUserDto.map((user) => {
+      return this.repository.create(user);
+    });
+    return await this.repository.save(users);
   }
 }
