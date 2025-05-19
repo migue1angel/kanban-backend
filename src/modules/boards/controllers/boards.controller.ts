@@ -20,6 +20,11 @@ export class BoardsController {
     return await this.boardsService.create(createBoardDto);
   }
 
+  @Get('user/:userId')
+  async findAllByUserId(@Param('userId') userId: string) {
+    return await this.boardsService.findAllByUserId(userId);
+  }
+
   /* @Get()
   findAll() {
     return this.boardsService.findAll();

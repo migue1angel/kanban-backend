@@ -30,11 +30,11 @@ export class TeamMemberEntity {
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
-  @ManyToOne(()=> BoardEntity, board => board.teamMembers)
+  @ManyToOne(() => BoardEntity, (board) => board.teamMembers)
   @JoinColumn({ name: 'board_id' })
   board: BoardEntity;
 
-  @ManyToMany(()=> RoleEntity)
+  @ManyToMany(() => RoleEntity, { eager: true })
   @JoinTable({
     name: 'team_members_roles',
   })

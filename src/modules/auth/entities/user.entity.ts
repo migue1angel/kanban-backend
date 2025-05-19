@@ -1,12 +1,7 @@
 import { BoardEntity } from 'src/modules/boards/entities/board.entity';
 import { FeedbackEntity } from 'src/modules/boards/entities/feedback.entity';
 import { TeamMemberEntity } from 'src/modules/teams/entities/team-members.entity';
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users', { schema: 'auth' })
 export class UserEntity {
@@ -21,7 +16,7 @@ export class UserEntity {
   })
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   // relationships
@@ -33,5 +28,4 @@ export class UserEntity {
 
   @OneToMany(() => BoardEntity, (board) => board.owner)
   boards: BoardEntity[];
-
 }

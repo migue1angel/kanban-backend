@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entities/user.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/user/create-user.dto';
 
 @Injectable()
@@ -28,7 +28,18 @@ export class UsersService {
       where: { email },
     });
   }
-  
+
+  async findByEmailOrUsername(identifier: string) {
+    const sanitizedIdentifier = identifier.replace(/\s+/g, '%');
+    return await this.repository.find({
+      where: [
+      { email: Like(`%${sanitizedIdentifier}%`) },
+      { username: Like(`%${sanitizedIdentifier}%`) },
+      ],
+      select: ['id', 'email', 'username'],
+    });
+  }
+
   async insertMany(createUserDto: CreateUserDto[]) {
     const users = createUserDto.map((user) => {
       return this.repository.create(user);

@@ -1,6 +1,21 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
+import {
+  ArrayMinSize,
+  IsDate,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  IsUUID,
+  ValidateNested,
+} from 'class-validator';
 import { BoardEntity } from '../../entities/board.entity';
+import {
+  IsArray,
+  ArrayNotEmpty,
+  IsUUID as IsUUIDValidator,
+} from 'class-validator';
+import { UserEntity } from 'src/modules/auth/entities/user.entity';
+import { RoleEntity } from 'src/modules/teams/entities/role.entity';
 
 export class CreateTaskDto {
   @IsString()
@@ -20,9 +35,10 @@ export class CreateTaskDto {
 
   @IsUUID()
   board: BoardEntity;
-  
-  // @IsString()
-  // @IsEnum(['todo', 'in_progress', 'to_review', 'done'])
-  // status: string;
 
+  @IsNotEmpty()
+  @IsArray()
+  @ArrayMinSize(1)
+  @IsUUID('all', { each: true })
+  taskAssignments: string[];
 }

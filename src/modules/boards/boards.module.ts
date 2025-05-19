@@ -6,16 +6,21 @@ import { BoardsService } from './services/boards.service';
 import { TasksService } from './services/tasks.service';
 import { TasksController } from './controllers/tasks.controller';
 import { TaskEntity } from './entities/task.entity';
-import { AttachmentsController, FeedbacksController } from './controllers';
-import { AttachmentsService, FeedbacksService } from './services';
-import { AttachmentEntity } from './entities/attachment.entity';
+import { FeedbacksController } from './controllers';
+import { FeedbacksService } from './services';
 import { FeedbackEntity } from './entities/feedback.entity';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([BoardEntity, TaskEntity, AttachmentEntity, FeedbackEntity]),
+    AuthModule,
+    TypeOrmModule.forFeature([
+      BoardEntity,
+      TaskEntity,
+      FeedbackEntity,
+    ]),
   ],
-  controllers: [BoardsController, TasksController, AttachmentsController, FeedbacksController],
-  providers: [BoardsService, TasksService, AttachmentsService, FeedbacksService],
+  controllers: [BoardsController, TasksController, FeedbacksController],
+  providers: [BoardsService, TasksService, FeedbacksService],
 })
 export class BoardsModule {}

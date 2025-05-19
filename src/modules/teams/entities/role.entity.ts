@@ -31,5 +31,4 @@ export class RoleEntity {
   })
   description: string;
 
-  // relationships
 }

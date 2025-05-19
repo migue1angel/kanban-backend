@@ -17,6 +17,7 @@ export class CreateTeamMemberDto {
   @IsUUID()
   boardId: string;
 
+  @IsNotEmpty()
   @IsArray()
   @ArrayMinSize(1)
   @ValidateNested({ each: true })

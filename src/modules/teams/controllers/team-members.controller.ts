@@ -19,11 +19,20 @@ export class TeamMembersController {
     return await this.teamMembersService.create(createTeamDto);
   }
 
+  @Post('many')
+  async createMany(@Body() createTeamDtos: CreateTeamMemberDto[]) {
+    return await this.teamMembersService.createMany(createTeamDtos);
+  }
+
   @Get()
-  findAll() {
+  async findAll() {
     return this.teamMembersService.findAll();
   }
 
+  @Get('board/:id')
+  async findByBoard(@Param('id') id: string) {
+    return await this.teamMembersService.findByBoard(id);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.teamMembersService.findOne(+id);

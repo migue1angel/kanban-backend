@@ -16,8 +16,25 @@ export class TeamMembersService {
     return await this.repository.save(teamMember);
   }
 
+  async createMany(createTeamMemberDtos: CreateTeamMemberDto[]) {
+    const createdMembers = await Promise.all(
+      createTeamMemberDtos.map((teamMember) => this.create(teamMember)),
+    );
+    return createdMembers;
+  }
+
   async findAll() {
     return `This action returns all teams`;
+  }
+
+  async findByBoard(boardId: string) {
+    return await this.repository.find({
+      where: { board: { id: boardId } },
+      relations: {
+        user: true,
+        roles: false,
+      },
+    });
   }
 
   async findOne(id: number) {

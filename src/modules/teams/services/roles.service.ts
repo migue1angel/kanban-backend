@@ -22,4 +22,8 @@ export class RolesService {
     });
     return await this.repository.save(roles);
   }
+
+  async findAll(): Promise<RoleEntity[]> {
+    return await this.repository.find();
+  }
 }

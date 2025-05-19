@@ -12,7 +12,6 @@ import {
 } from 'typeorm';
 import { BoardEntity } from './board.entity';
 import { UserEntity } from 'src/modules/auth/entities/user.entity';
-import { AttachmentEntity } from './attachment.entity';
 import { FeedbackEntity } from './feedback.entity';
 
 @Entity('tasks', { schema: 'boards' })
@@ -55,14 +54,11 @@ export class TaskEntity {
   @JoinColumn({ name: 'board_id' })
   board: BoardEntity;
 
-  @OneToMany(() => AttachmentEntity, (attachment) => attachment.task)
-  attachments: AttachmentEntity[];
-
-  @ManyToMany(() => UserEntity, (user) => user.teamMembers)
+  @ManyToMany(() => UserEntity, { eager: true })
   @JoinTable({
     name: 'tasks_assignments',
   })
-  users: UserEntity[];
+  taskAssignments: UserEntity[];
 
   @OneToMany(() => FeedbackEntity, (feedback) => feedback.task)
   feedbacks: FeedbackEntity[];
