@@ -16,7 +16,7 @@ export class UserEntity {
   })
   email: string;
 
-  @Column({ select: false })
+  @Column({})
   password: string;
 
   // relationships
