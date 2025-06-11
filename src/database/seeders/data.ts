@@ -10,6 +10,10 @@ export const roles: CreateRoleDto[] = [
     name: 'REVIEWER',
     code: 2,
   },
+  {
+    name: 'MEMBER',
+    code: 3,
+  },
 ];
 
 export const users: CreateUserDto[] = [

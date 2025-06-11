@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { RolesService } from 'src/modules/teams/services/roles.service';
-import { roles } from './data';
+import { roles, users } from './data';
 import { UsersService } from 'src/modules/auth/services/users.service';
-import { users } from './data';
 ;
 
 @Injectable()
