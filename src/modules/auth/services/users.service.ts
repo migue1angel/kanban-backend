@@ -26,6 +26,7 @@ export class UsersService {
   async findOneByEmail(email: string) {
     return await this.repository.findOne({
       where: { email },
+      select: ['id', 'email', 'username', 'password'],
     });
   }
 
@@ -33,7 +34,7 @@ export class UsersService {
     if (!id) throw new NotFoundException('User not found');
     const user = await this.repository.findOne({
       where: { id: id },
-      select: ['id', 'email', 'username'],
+      // select: ['id', 'email', 'username'],
     });
     return user;
   }
@@ -45,7 +46,7 @@ export class UsersService {
         { email: Like(`%${sanitizedIdentifier}%`) },
         { username: Like(`%${sanitizedIdentifier}%`) },
       ],
-      select: ['id', 'email', 'username'],
+      // select: ['id', 'email', 'username'],
     });
   }
 

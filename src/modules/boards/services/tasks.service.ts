@@ -31,6 +31,24 @@ export class TasksService {
     return await this.taskRepository.find();
   }
   async findByBoard(boardId: string) {
-    return await this.taskRepository.findBy({ board: { id: boardId } });
+    return await this.taskRepository.find({
+      where: { board: { id: boardId } },
+      relations: {
+        feedbacks: true,
+        taskAssignments: true,
+      },
+    });
+  }
+
+  async changeStatus(
+    taskId: string,
+    status: 'todo' | 'in_progress' | 'to_review' | 'done',
+  ) {
+    const task = await this.taskRepository.findOneBy({ id: taskId });
+    if (!task) {
+      throw new Error('Task not found');
+    }
+    task.status = status;
+    return this.taskRepository.save(task);
   }
 }

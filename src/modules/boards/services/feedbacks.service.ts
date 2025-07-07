@@ -13,6 +13,6 @@ export class FeedbacksService {
 
   async create(createFeedbackDto: CreateFeedbackDto) {
     const feedback = this.feedbackRepository.create(createFeedbackDto);
-    return this.feedbackRepository.save(createFeedbackDto);
+    return await this.feedbackRepository.save(feedback);
   }
 }

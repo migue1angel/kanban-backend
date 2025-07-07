@@ -30,7 +30,14 @@ export class AuthService {
 
     const token = await this.generateJwt(user.id);
 
-    return { user, token };
+    return {
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.username,
+      },
+      token,
+    };
   }
 
   async register(registerDto: RegisterDto) {

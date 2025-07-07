@@ -17,7 +17,7 @@ import { FeedbackEntity } from './feedback.entity';
 @Entity('tasks', { schema: 'boards' })
 export class TaskEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @CreateDateColumn({
     name: 'created_at',
