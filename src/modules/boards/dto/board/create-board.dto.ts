@@ -6,9 +6,8 @@ export class CreateBoardDto {
     @IsString()
     name: string;
 
-    @IsNotEmpty()
     @IsString()
-    description: string;
+    description?: string;
 
     @IsNotEmpty()
     @IsUUID()

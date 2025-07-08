@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CreateTaskDto } from '../dto/task/create-task.dto';
 import { TasksService } from '../services/tasks.service';
 
@@ -26,5 +26,10 @@ export class TasksController {
     @Body('status') status: 'todo' | 'in_progress' | 'to_review' | 'done',
   ) {
     return await this.tasksService.changeStatus(taskId, status);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return await this.tasksService.remove(id);
   }
 }

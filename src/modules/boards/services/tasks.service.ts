@@ -40,6 +40,14 @@ export class TasksService {
     });
   }
 
+  async remove(taskId: string) {
+    const task = await this.taskRepository.findOneBy({ id: taskId });
+    if (!task) {
+      throw new Error('Task not found');
+    }
+    return await this.taskRepository.softRemove(task);
+  }
+
   async changeStatus(
     taskId: string,
     status: 'todo' | 'in_progress' | 'to_review' | 'done',

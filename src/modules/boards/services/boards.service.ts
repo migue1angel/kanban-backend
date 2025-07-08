@@ -28,8 +28,8 @@ export class BoardsService {
     return `This action returns all boards`;
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} board`;
+  async findOne(id: string) {
+    return await this.boardsRepository.findOneBy({ id });
   }
 
   async update(id: number, updateBoardDto: UpdateBoardDto) {

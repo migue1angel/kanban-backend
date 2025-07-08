@@ -25,15 +25,15 @@ export class BoardsController {
     return await this.boardsService.findAllByUserId(userId);
   }
 
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return await this.boardsService.findOne(id);
+  }
   /* @Get()
   findAll() {
     return this.boardsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.boardsService.findOne(+id);
-  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBoardDto: UpdateBoardDto) {
